@@ -1,0 +1,8 @@
+{
+  "name": "hillel/superiplookupinterface",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookupinterface\\": "./src"
+    }
+  }
+}

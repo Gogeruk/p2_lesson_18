@@ -1,0 +1,426 @@
+///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+
+/////   DONE    /////
+1. Вынести интерфейс и адаптеры с прошлых домашних
+ заданий в отдельные репозитории.
+/////   DONE    /////
+
+    /////   DONE    /////
+    Интерфейса GEO
+    Первый сервис для работы с GEO
+    Второй сервис для работы с GEO
+    /////   DONE    /////
+
+    /////   DONE    /////
+    Интерфейса User Agent
+    Первый сервис для работы с User-Agent
+    Второй сервис для работы с User-Agent
+    /////   DONE    /////
+
+/////   DONE    /////
+2. Подключить 1-3
+к основному проекту через composer (прямое подключение через git репозиторий)
+/////   DONE    /////
+
+/////   DONE    /////
+3. Для репозиториев 4-6
+зарегистрировать пакеты в Packagist
+и подключить к основному проекту через composer.
+/////   DONE    /////
+
+/////   DONE    /////
+Версии всех подключаемых пакетов должны быть
+ ^1.0 (т.е. нужно будет в репозитории добавить теги)
+/////   DONE    /////
+
+
+
+
+LETS FUCKING GOOOOOOOOO!!!!!!!!
+
+
+/////   LOCAL REPO STORAGE  /////
+1.
+mkdir my_super_lib
+cd my_super_lib
+mkdir src
+touch composer.json
+/my_services/   cp * ../../../../my_super_lib/src/
+
+
+2. nano composer.json
+
+{
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookup\\": "./src"
+    }
+  }
+}
+
+3) change namespaces in copied service to
+namespace Hillel\Iplookup;
+
+4) look at your services
+they may use some other calsses
+
+for example
+use Illuminate\Support\Facades\Http;
+
+you need to require them n your composer.json
+
+{
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookup\\": "./src"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0",
+    "geoip2/geoip2": "~2.0"
+  }
+}
+
+
+5) add a name
+
+{
+  "name": "hillel/superiplookup",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookup\\": "./src"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0",
+    "geoip2/geoip2": "~2.0"
+  }
+}
+
+!!! NOTE !!!
+for local storage the name does not metter much
+but if you do it ~online the name might be taken
+so make it unique from the start
+
+
+7) you have enought info to connect it localy
+to your project
+go to your project and change composer json there
+require it
+
+"require": {
+    "php": "^7.3|^8.0",
+    "fideloper/proxy": "^4.4",
+    "fruitcake/laravel-cors": "^2.0",
+    "geoip2/geoip2": "~2.0",
+    "guzzlehttp/guzzle": "^7.0.1",
+    "laravel/framework": "^8.12",
+    "laravel/tinker": "^2.5",
+    "livewire/livewire": "^2.4",
+    "ua-parser/uap-php": "^3.9",
+    "whichbrowser/parser": "^2.1",
+    "hillel/superiplookup": "master-dev"
+},
+
+"hillel/superiplookup": "master-dev"
+
+see this shit?
+master-dev just means that you dont have ay versions
+it just takes the standart stuff because of "master-dev"
+
+8)
+tell composer the location of your repostory:
+like a so:
+
+"repositories": [
+    {
+        "type": "path",
+        "url": "../path/to/rep"
+    }
+]
+
+example:
+
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "my_super_lib"
+        }
+    ]
+}
+
+
+
+9)
+do
+composer update
+
+and then check vender
+it now should have a hillel/superiplookup
+
+
+10)
+change the name spaces whre you use your repository
+
+use Hillel\Iplookup\NAME;
+
+all good!
+You have created a local repository and linked it ti you project
+
+/////   LOCAL REPO STORAGE  /////
+
+/////   REMOTE REPO STORAGE  /////
+
+11)
+Now give access to your repo to EVERYONE
+including (you)
+
+everything is the same but instead of storing repo on your machine
+you shit the githubs storage (which is a good thing, fuck github)
+
+12)
+upload your shit on git hub
+
+13)
+change
+
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "link to git repo (github)"
+        }
+    ]
+}
+
+14) composer update
+
+DONE
+
+/////   REMOTE REPO STORAGE  /////
+
+/////   IMPORTANT NOTE  /////
+15)
+You see when you have a structure of
+
+repository:
+interface
+service 1
+service 2
+
+You will always end up downloading unnecessary bullshit
+to combat that toy need to do this
+
+repository:
+interface
+repository:
+service 1
+repository:
+service 2
+
+so everything is seperate and you download only stuff you actully need
+good?
+
+YES they all have their own composer.json inside
+
+composer.json will look something like this
+
+repository:
+src/interface
+composer,json
+{
+  "name": "hillel/superiplookupinterface",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookupinterface\\": "./src"
+    }
+  }
+}
+
+
+repository:
+src/service 1
+composer,json
+{
+  "name": "hillel/superiplookupservice1",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookupservice1\\": "./src"
+    }
+  },
+  "require": {
+    "geoip2/geoip2": "~2.0",
+    "repo/inteface" : "^1.0.0"
+  },
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "url/to/interface"
+      }
+  ]
+}
+
+
+repository:
+src/service 2
+composer,json
+{
+  "name": "hillel/superiplookupservice2",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Iplookupservice2\\": "./src"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0",
+    "repo/inteface" : "^1.0.0"
+  },
+  "repositories": [
+      {
+          "type": "vcs",
+          "url": "url/to/interface"
+      }
+  ]
+}
+
+
+!!!!! note thath your names and namespaces are now changed !!!!!
+
+Youe main composer json file will now have somethi like a so:
+........
+"require": {
+    "hillel/superiplookupinterface": "^1.0.0",
+    "hillel/superiplookupservice1": "^1.0.0",
+    "hillel/superiplookupservice2": "^1.0.0"
+........
+            ]
+        },
+        "repositories": [
+        {
+            "type": "vcs",
+            "url": "url/to/interface"
+        },
+        {
+            "type": "vcs",
+            "url": "url/to/service 1"
+        },
+        {
+            "type": "vcs",
+            "url": "url/to/service 2"
+        }
+    ]
+}
+
+DONT FUCKING FORGET TO CHANE NAMESPACES AND ADD SOURCES!!!!!!
+I WILL FUCKING MURDER YOU IF THIS SHIT HAPPENS!
+
+also edit release tags to be v1.0.0 and v1.0.1
+
+and boom!
+after changin some namespaces you are good to go!
+/////   IMPORTANT NOTE  /////
+
+
+1:09:10
+/////   PACKAGIST   /////
+
+16)
+the fucking problem is that you need to add too much shit to
+your composer.json
+
+    "repositories": [
+    ????
+    why do we need this
+    I am lazy...
+    fuck it!
+
+so thats why you use PACKAGIST
+
+17)
+go login to packegist
+
+
+18)
+do you see this shit???
+
+{
+  "name": "hillel/superuserlookupinterface",
+  "autoload": {
+    "psr-4": {
+
+
+the name section MSUT be unique or else packegist will tell you to fuck off
+make both hillel and superuserlookupinterface unique
+YES BOTH
+
+also remove this SHIT
+
+},
+"repositories": [
+{
+    "type": "vcs",
+    "url": "url/to/interface"
+},
+
+you dont need those anymore
+
+
+NOTE that this name and name of the repository
+ in github are completly separate things
+
+
+19) upload stuff to github
+and then connect packegist with github repositories
+and then require your packegis in "require" section of your MAIN project composer.json
+
+and boom!
+
+after composer update everything should work
+
+/////   PACKAGIST   /////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///

@@ -1,0 +1,13 @@
+{
+  "name": "megadupersuperuniqueawsomeomegaalphacoolnameover9000/superuserlookupservice1",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Useragentlookupservice1\\": "./src"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0",
+    "ua-parser/uap-php": "^3.9",
+    "megadupersuperuniqueawsomeomegaalphacoolnameover9000/superuserlookupinterface" : "^1.0.0"
+  }
+}

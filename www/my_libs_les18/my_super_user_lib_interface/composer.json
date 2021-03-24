@@ -1,0 +1,11 @@
+{
+  "name": "megadupersuperuniqueawsomeomegaalphacoolnameover9000/superuserlookupinterface",
+  "autoload": {
+    "psr-4": {
+      "Hillel\\Useragentlookupinterface\\": "./src"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
+  }
+}
